@@ -1,0 +1,24 @@
+// Prisma 7 — 新しい `prisma-client` ジェネレータ。
+// 生成物は import パス規約に合わせて src/generated/prisma/client へ出力する。
+generator client {
+  provider = "prisma-client"
+  // 生成物の入口は `<output>/client.ts`。import 規約 `@/generated/prisma/client`
+  // に合わせて output を src/generated/prisma に置く。
+  output   = "../src/generated/prisma"
+}
+
+// Prisma 7 では接続 URL はスキーマではなく prisma.config.ts と
+// PrismaClient のアダプタ側で指定する。
+datasource db {
+  provider = "mysql"
+}
+
+/// 管理画面（/admin）にログインできる管理者ユーザー。
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
