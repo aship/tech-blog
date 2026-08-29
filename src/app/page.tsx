@@ -1,14 +1,14 @@
 import { BookCard } from "@/components/book-card";
 import { SectionHeading } from "@/components/section-heading";
 import {
+  getFeaturedBooks,
   getGenres,
   getNews,
-  getNewBooks,
   shopInfo,
 } from "@/lib/shop-data";
 
 export default function Home() {
-  const newBooks = getNewBooks();
+  const featuredBooks = getFeaturedBooks();
   const genres = getGenres();
   const news = getNews();
 
@@ -19,24 +19,24 @@ export default function Home() {
         <div className="mx-auto grid w-full max-w-6xl gap-10 px-5 py-20 md:grid-cols-[1.2fr_1fr] md:items-center md:py-28">
           <div>
             <p className="text-sm tracking-[0.3em] text-accent">
-              {shopInfo.nameEn} — 街の本屋
+              {shopInfo.nameEn} — 近現代史と地政学の専門書店
             </p>
             <h1 className="mt-5 font-serif text-4xl font-extrabold leading-tight text-ink sm:text-5xl">
-              本と、
+              教科書の、
               <br />
-              もう少し長く。
+              その先の棚へ。
             </h1>
             <p className="mt-6 max-w-md text-base leading-8 text-foreground/80">
-              あしp書店は、新刊も、長く読み継がれる一冊も、
-              分け隔てなく並べる小さな本屋です。
-              棚をゆっくり歩く時間を、どうぞ。
+              あしp書店は、渡辺惣樹と茂木誠の著作を軸に、
+              日米関係史・第二次世界大戦・地政学の本を集めた専門書店です。
+              関連する翻訳書や当事者の記録もあわせて並べています。
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="#new"
                 className="rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
               >
-                新刊を見る
+                話題の本を見る
               </a>
               <a
                 href="#access"
@@ -50,12 +50,12 @@ export default function Home() {
           {/* 本棚のモチーフ */}
           <div className="flex items-end justify-center gap-2" aria-hidden>
             {[
-              { h: "h-56", c: "#9a322b" },
-              { h: "h-72", c: "#3f5b74" },
-              { h: "h-64", c: "#2f6b5e" },
-              { h: "h-80", c: "#4a3b6b" },
+              { h: "h-56", c: "#2f3d5c" },
+              { h: "h-72", c: "#6a2f2f" },
+              { h: "h-64", c: "#3a3a3a" },
+              { h: "h-80", c: "#2f6b5e" },
               { h: "h-60", c: "#b08b4f" },
-              { h: "h-72", c: "#8a5a3c" },
+              { h: "h-72", c: "#9a322b" },
             ].map((s, i) => (
               <div
                 key={i}
@@ -69,14 +69,14 @@ export default function Home() {
 
       {/* 新刊・話題の本 */}
       <section id="new" className="mx-auto w-full max-w-6xl px-5 py-20">
-        <SectionHeading en="NEW &amp; FEATURED">新刊・話題の本</SectionHeading>
+        <SectionHeading en="FEATURED">話題の本</SectionHeading>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {newBooks.map((book) => (
+          {featuredBooks.map((book) => (
             <BookCard key={book.title} book={book} />
           ))}
         </div>
         <p className="mt-6 text-sm text-muted">
-          ※ 在庫状況はお電話でお問い合わせください。取り寄せも承ります。
+          ※ 在庫状況はお電話でお問い合わせください。品切れ・重版未定の書籍もお調べします。
         </p>
       </section>
 
@@ -112,12 +112,12 @@ export default function Home() {
           <div>
             <p className="text-xs tracking-[0.3em] opacity-80">2026 AUGUST</p>
             <h3 className="mt-3 font-serif text-3xl font-extrabold">
-              夏の終わりに読む一冊
+              教科書に書けない近現代史
             </h3>
             <p className="mt-4 max-w-md text-sm leading-7 opacity-90">
-              日が短くなりはじめる頃に開きたくなる本を、
-              店主とスタッフがそれぞれ選びました。
-              手書きのカードを添えて、店頭中央の平台に並べています。
+              対談本『教科書に書けないグローバリストの近現代史』を入口に、
+              渡辺惣樹・茂木誠それぞれの単著、翻訳書、当事者の記録を
+              まとめて店頭中央の平台に並べています。
             </p>
           </div>
           <ul className="space-y-3 border-t border-white/20 pt-6 text-sm md:border-l md:border-t-0 md:pt-0 md:pl-8">

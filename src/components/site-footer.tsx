@@ -10,7 +10,7 @@ export function SiteFooter() {
             {shopInfo.name}
           </p>
           <p className="mt-3 text-sm leading-6 text-muted">
-            {shopInfo.tagline}
+            {shopInfo.focus}
             <br />
             {shopInfo.since}年creation。
           </p>
