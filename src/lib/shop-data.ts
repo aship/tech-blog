@@ -18,7 +18,7 @@ export const shopInfo = {
   nameEn: "ASHIP BOOKS",
   tagline: "近現代史と地政学の棚から。",
   focus:
-    "渡辺惣樹と茂木誠の著作を軸に、日米関係史・第二次世界大戦・地政学の本を集めています。",
+    "渡辺惣樹・茂木誠・宇山卓栄の著作を軸に、日米関係史・第二次世界大戦・地政学・民族史の本を集めています。",
   since: 1998,
   postalCode: "000-0000",
   address: "どこかの街 本町1-2-3 あしpビル 1F",
@@ -73,6 +73,27 @@ export function getFeaturedBooks(): Book[] {
       note: "二人の対談で、教科書には収まらない近現代史の裏側をたどる。",
       spine: "#9a322b",
     },
+    {
+      title: "世界「民族」全史 衝突と融合の人類5000年史",
+      author: "宇山卓栄",
+      publisher: "日本実業出版社",
+      note: "人類5000年を「民族」の衝突と融合の視点で通観する大著。",
+      spine: "#4a3b6b",
+    },
+    {
+      title: "「宗教」で読み解く世界史",
+      author: "宇山卓栄",
+      publisher: "日本実業出版社",
+      note: "宗教の対立と交わりから、世界史の骨格をつかむ。",
+      spine: "#3f5b74",
+    },
+    {
+      title: "民族と文明で読み解く大アジア史",
+      author: "宇山卓栄",
+      publisher: "講談社現代新書",
+      note: "中国・インド・イスラム圏を貫く、アジア史の見取り図。",
+      spine: "#7a4a2f",
+    },
   ];
 }
 
@@ -96,7 +117,7 @@ export function getGenres(): Genre[] {
     {
       label: "世界史・通史",
       reading: "SEKAISHI",
-      description: "経済・宗教・思想でつなげる世界史",
+      description: "経済・宗教・民族でつなげる世界史（茂木誠・宇山卓栄）",
     },
     {
       label: "対談・共著",
