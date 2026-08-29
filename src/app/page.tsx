@@ -27,8 +27,8 @@ export default function Home() {
               その先の棚へ。
             </h1>
             <p className="mt-6 max-w-md text-base leading-8 text-foreground/80">
-              あしp書店は、渡辺惣樹と茂木誠の著作を軸に、
-              日米関係史・第二次世界大戦・地政学の本を集めた専門書店です。
+              あしp書店は、渡辺惣樹・茂木誠・宇山卓栄の著作を軸に、
+              日米関係史・第二次世界大戦・地政学・民族史の本を集めた専門書店です。
               関連する翻訳書や当事者の記録もあわせて並べています。
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -56,6 +56,9 @@ export default function Home() {
               { h: "h-80", c: "#2f6b5e" },
               { h: "h-60", c: "#b08b4f" },
               { h: "h-72", c: "#9a322b" },
+              { h: "h-64", c: "#4a3b6b" },
+              { h: "h-80", c: "#3f5b74" },
+              { h: "h-56", c: "#7a4a2f" },
             ].map((s, i) => (
               <div
                 key={i}
