@@ -1,123 +1,17 @@
-import type { ReactNode } from "react";
-
-/* ------------------------------ データ ------------------------------ */
-
-type Book = {
-  title: string;
-  author: string;
-  note: string;
-  spine: string; // 背表紙の色
-};
-
-const newBooks: Book[] = [
-  {
-    title: "夜明けの図書室",
-    author: "橘 あかね",
-    note: "静かな町の図書室を舞台にした連作短編。",
-    spine: "#3f5b74",
-  },
-  {
-    title: "珈琲と余白",
-    author: "森下 涼",
-    note: "喫茶店の店主が綴る、暮らしのエッセイ集。",
-    spine: "#8a5a3c",
-  },
-  {
-    title: "海を編む人々",
-    author: "Ana Ferreira",
-    note: "漁村の三世代を描く長編小説。翻訳文学。",
-    spine: "#2f6b5e",
-  },
-  {
-    title: "はじめての天文学",
-    author: "北村 恒",
-    note: "図版とともに学ぶ、やさしい入門書。",
-    spine: "#4a3b6b",
-  },
-  {
-    title: "台所の道具帖",
-    author: "小島 みどり",
-    note: "使い込むほど愛おしい、道具の話。",
-    spine: "#9a322b",
-  },
-  {
-    title: "とりのいる暮らし",
-    author: "ふじた けい",
-    note: "文鳥と過ごす日々を描いたコミックエッセイ。",
-    spine: "#b08b4f",
-  },
-];
-
-type Genre = {
-  label: string;
-  reading: string;
-  description: string;
-};
-
-const genres: Genre[] = [
-  { label: "文芸・小説", reading: "BUNGEI", description: "国内文学から翻訳まで" },
-  { label: "人文・思想", reading: "JINBUN", description: "哲学・歴史・社会" },
-  { label: "暮らし・料理", reading: "KURASHI", description: "食・住まい・手仕事" },
-  { label: "児童書・絵本", reading: "JIDO", description: "読み聞かせから読み物へ" },
-  { label: "芸術・デザイン", reading: "ART", description: "写真集・作品集・展覧会図録" },
-  { label: "自然科学", reading: "SCIENCE", description: "数学・物理・生きもの" },
-];
-
-type NewsItem = {
-  date: string;
-  tag: string;
-  title: string;
-};
-
-const news: NewsItem[] = [
-  { date: "2026.08.20", tag: "フェア", title: "「夏の終わりに読む一冊」フェア開催中" },
-  { date: "2026.08.12", tag: "イベント", title: "8/30(土) 橘あかねさん サイン会のお知らせ" },
-  { date: "2026.08.01", tag: "お知らせ", title: "8月の営業日カレンダーを更新しました" },
-];
-
-/* ------------------------------ 部品 ------------------------------ */
-
-function SectionHeading({
-  en,
-  children,
-}: {
-  en: string;
-  children: ReactNode;
-}) {
-  return (
-    <div className="mb-8 flex items-end justify-between gap-4 border-b border-line pb-4">
-      <h2 className="font-serif text-2xl font-bold text-ink sm:text-3xl">
-        {children}
-      </h2>
-      <span className="text-xs tracking-[0.3em] text-muted">{en}</span>
-    </div>
-  );
-}
-
-function BookCard({ book }: { book: Book }) {
-  return (
-    <article className="group flex gap-4 rounded-lg border border-line bg-paper p-4 transition-shadow hover:shadow-md">
-      <div
-        className="flex w-14 shrink-0 items-center justify-center rounded-sm shadow-inner"
-        style={{ backgroundColor: book.spine }}
-        aria-hidden
-      >
-        <span className="px-1 py-3 text-[10px] font-medium leading-tight tracking-tight text-white/85 [writing-mode:vertical-rl]">
-          {book.title}
-        </span>
-      </div>
-      <div className="min-w-0">
-        <h3 className="font-serif text-lg font-bold text-ink">{book.title}</h3>
-        <p className="mt-0.5 text-xs text-muted">{book.author}</p>
-        <p className="mt-2 text-sm leading-6 text-foreground/80">{book.note}</p>
-      </div>
-    </article>
-  );
-}
-
-/* ------------------------------ ページ ------------------------------ */
+import { BookCard } from "@/components/book-card";
+import { SectionHeading } from "@/components/section-heading";
+import {
+  getGenres,
+  getNews,
+  getNewBooks,
+  shopInfo,
+} from "@/lib/shop-data";
 
 export default function Home() {
+  const newBooks = getNewBooks();
+  const genres = getGenres();
+  const news = getNews();
+
   return (
     <main>
       {/* ヒーロー */}
@@ -125,7 +19,7 @@ export default function Home() {
         <div className="mx-auto grid w-full max-w-6xl gap-10 px-5 py-20 md:grid-cols-[1.2fr_1fr] md:items-center md:py-28">
           <div>
             <p className="text-sm tracking-[0.3em] text-accent">
-              ASHIP BOOKS — 街の本屋
+              {shopInfo.nameEn} — 街の本屋
             </p>
             <h1 className="mt-5 font-serif text-4xl font-extrabold leading-tight text-ink sm:text-5xl">
               本と、
@@ -250,27 +144,27 @@ export default function Home() {
               <div className="flex gap-6 py-3">
                 <dt className="w-20 shrink-0 text-muted">住所</dt>
                 <dd className="leading-6">
-                  〒000-0000
+                  〒{shopInfo.postalCode}
                   <br />
-                  どこかの街 本町1-2-3 あしpビル 1F
+                  {shopInfo.address}
                 </dd>
               </div>
               <div className="flex gap-6 py-3">
                 <dt className="w-20 shrink-0 text-muted">営業時間</dt>
                 <dd className="leading-6">
-                  10:00 – 21:00
+                  {shopInfo.hours}
                   <br />
-                  年中無休（元日を除く）
+                  {shopInfo.holiday}
                 </dd>
               </div>
               <div className="flex gap-6 py-3">
                 <dt className="w-20 shrink-0 text-muted">電話</dt>
-                <dd className="leading-6">000-000-0000</dd>
+                <dd className="leading-6">{shopInfo.tel}</dd>
               </div>
               <div className="flex gap-6 py-3">
                 <dt className="w-20 shrink-0 text-muted">アクセス</dt>
                 <dd className="leading-6">
-                  本町駅 3番出口より徒歩4分
+                  {shopInfo.access}
                   <br />
                   駐輪場あり／専用駐車場はございません
                 </dd>
@@ -288,7 +182,7 @@ export default function Home() {
               お電話または店頭のカウンターまでお気軽にどうぞ。
             </p>
             <a
-              href="tel:000-000-0000"
+              href={`tel:${shopInfo.tel}`}
               className="mt-6 inline-flex w-fit rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
             >
               電話でお問い合わせ
